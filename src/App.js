@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Outlet } from 'react-router-dom'
 import axios from 'axios'
 
 const App = () => {
+  
+  const searchUser = () => {
+
+  }
+
   return (
     <div>
-      <h1>Test</h1>
+      <form>
+        <input onSubmit={searchUser} />
+      </form>
+      <Outlet />
     </div>
   )
 }
