@@ -1,17 +1,24 @@
 import React, { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { 
+  Outlet,
+  useNavigate
+} from 'react-router-dom'
 import axios from 'axios'
 
 const App = () => {
-  
-  const searchUser = () => {
+  let navigate = useNavigate()
+  const [summonerSearch, setSummonerSearch] = useState('')
 
+  const searchUser = (e) => {
+    e.preventDefault()
+    navigate("/summoner/" + summonerSearch)
+    setSummonerSearch('')
   }
 
   return (
     <div>
-      <form>
-        <input onSubmit={searchUser} />
+      <form onSubmit={searchUser}>
+        <input type="text" onChange={(e) => setSummonerSearch(e.target.value)}value={summonerSearch} />
       </form>
       <Outlet />
     </div>
