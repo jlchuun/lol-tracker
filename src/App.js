@@ -3,7 +3,6 @@ import {
   Outlet,
   useNavigate
 } from 'react-router-dom'
-import axios from 'axios'
 
 const App = () => {
   let navigate = useNavigate()
