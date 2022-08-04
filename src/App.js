@@ -8,11 +8,12 @@ import summonerService from './services/summoner'
 const App = () => {
   let navigate = useNavigate()
   const [summonerSearch, setSummonerSearch] = useState('')
+  let summonerInfo = null
 
   const searchUser = (e) => {
     e.preventDefault()
     navigate("/summoner/" + summonerSearch)
-    summonerService.getSummoner(summonerSearch)
+    summonerService.getSummoner(summonerSearch).then((summ) => summonerInfo = summ)
     setSummonerSearch('')
   }
 
