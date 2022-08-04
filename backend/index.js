@@ -1,9 +1,9 @@
 const http = require('http')
 const app = require('./app')
 
-
+const PORT = process.env.PORT || 3003
 const server = http.createServer(app)
 
-server.listen(3003, () => {
-    console.log('Server connected to port 3003')
+server.listen(PORT, () => {
+    console.log(`Server connected to port ${PORT}`)
 })

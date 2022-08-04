@@ -3,6 +3,7 @@ import {
   Outlet,
   useNavigate
 } from 'react-router-dom'
+import summonerService from './services/summoner'
 
 const App = () => {
   let navigate = useNavigate()
@@ -11,6 +12,7 @@ const App = () => {
   const searchUser = (e) => {
     e.preventDefault()
     navigate("/summoner/" + summonerSearch)
+    summonerService.getSummoner(summonerSearch)
     setSummonerSearch('')
   }
 

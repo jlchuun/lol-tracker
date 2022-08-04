@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { 
   BrowserRouter,
   Routes,
@@ -7,13 +7,11 @@ import {
 import App from './App'
 import Summoner from './components/Summoner'
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="summoner/:summonerName" element={<Summoner />} />
       </Route>
     </Routes>
-  </BrowserRouter>,
-  document.getElementById('root')
-)
+  </BrowserRouter>)

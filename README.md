@@ -1,1 +1,1 @@
-# League of Legends Stack Tracker
+# League of Legends Stat Tracker
