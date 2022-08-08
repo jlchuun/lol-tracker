@@ -2,22 +2,19 @@ require('dotenv').config()
 const summonerRouter = require('express').Router()
 const axios = require('axios')
 
-
 let key = process.env.RIOT_KEY
-let summonerInfo = null
-summonerRouter.get('/:summonerName', (request, response) => {
-    console.log(key)
+
+summonerRouter.get('/:summonerName', (req, res) => {
     axios.get(
-        `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${request.params.summonerName}?api_key=${key}`
+        `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${req.params.summonerName}?api_key=${key}`
     )
     .then(response => {
-        summonerInfo = response.data
         console.log(response.data)
+        return res.send(response.data)
     })
     .catch(error => {
-        console.log(error.message, 'test')
+        console.log(error.message)
     })
-    response.json(summonerInfo)
 })
 
 module.exports = summonerRouter
