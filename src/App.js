@@ -14,7 +14,7 @@ const App = () => {
       .catch(error => console.log(error))
 
     axios
-      .get(`/summoner/${summoner.name}/matches`)
+      .get(`/summoner/${summonerSearch}/matches`)
       .then(response => setMatchHistory(response.data))
       .catch(error => console.log(error))
 
@@ -28,6 +28,23 @@ const App = () => {
         <input type="text" onChange={(e) => setSummonerSearch(e.target.value)}value={summonerSearch} />
       </form>
       {JSON.stringify(summoner) !== '{}' ? <p>{summoner.name}</p> : <p>No Player Data</p>} 
+
+      {matchHistory.length !== 0 ? 
+        <>
+        {matchHistory.map((matchInfo, index) => 
+          <>
+            <h1>Match {index + 1}</h1>
+            <div>
+              {matchInfo.info.participants.map((data, summIndex) => 
+                <p>Player {summIndex + 1}: {data.summonerName}, KDA: {data.kills} / {data.deaths} / {data.assists}</p>
+              )}
+            </div>
+          </>)}
+        </>
+        :
+        <></>
+      }
+      
     </div>
   )
 }

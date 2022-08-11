@@ -31,7 +31,7 @@ summonerRouter.get('/:summonerName/matches', async (req, res) => {
     const puuid = await getSummPuuid(req.params.summonerName)
 
     const matchIDs = await axios.get(
-        `https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=20&api_key=${key}`
+        `https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${key}`
     )
     .then(response => {
         return response.data
