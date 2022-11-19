@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import appStyles from './App.module.css'
 import axios from 'axios'
 
 const App = () => {
@@ -22,28 +23,36 @@ const App = () => {
     setSummonerSearch('')
   }
 
-  return (
-    <div>
-      <form onSubmit={summ => searchUser(summ)}>
-        <input type="text" onChange={(e) => setSummonerSearch(e.target.value)}value={summonerSearch} />
-      </form>
-      {JSON.stringify(summoner) !== '{}' ? <p>{summoner.name}</p> : <p>No Player Data</p>} 
+  useEffect(() => {
+    document.title = 'LoL Tracker'
+  }, [])
 
-      {matchHistory.length !== 0 ? 
-        <>
-        {matchHistory.map((matchInfo, index) => 
+  return (
+    <div className={appStyles.container}>
+      <header className={appStyles.header}>
+        <h1>LoL Tracker</h1>
+        <form onSubmit={summ => searchUser(summ)}>
+          <input type="text" onChange={(e) => setSummonerSearch(e.target.value)}value={summonerSearch} />
+        </form>
+        {JSON.stringify(summoner) !== '{}' ? <p>{summoner.name}</p> : <p>No Player Data</p>} 
+      </header>
+
+      <div className={appStyles.matchHistory}>
+        {matchHistory.length !== 0 ? 
           <>
-            <h1>Match {index + 1}</h1>
-            <div>
-              {matchInfo.info.participants.map((data, summIndex) => 
-                <p>Player {summIndex + 1}: {data.summonerName}, KDA: {data.kills} / {data.deaths} / {data.assists}</p>
-              )}
-            </div>
-          </>)}
-        </>
-        :
-        <></>
-      }
+          {matchHistory.map((matchInfo) => 
+            <>
+              <div className={appStyles.match}>
+                {matchInfo.info.participants.map((data) => 
+                  <p>{data.summonerName}, KDA: {data.kills} / {data.deaths} / {data.assists}</p>
+                )}
+              </div>
+            </>)}
+          </>
+          :
+          <></>
+        }
+      </div>
       
     </div>
   )
