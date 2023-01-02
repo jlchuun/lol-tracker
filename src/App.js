@@ -29,7 +29,39 @@ const App = () => {
 
   return (
     <div className={appStyles.container}>
-      <header className={appStyles.header}>
+      <nav>
+        <div className={appStyles.icon}>
+          <h1>LoL Tracker</h1>
+        </div>
+        <div className={appStyles.searchBar}>
+          <form onSubmit={summ => searchUser(summ)}>
+            <input className={appStyles.searchInput} type="text" onChange={(e) => setSummonerSearch(e.target.value)}value={summonerSearch} />
+          </form>
+        </div>
+      </nav>
+      <header>
+        <img src={"http://ddragon.leagueoflegends.com/cdn/12.23.1/img/profileicon/" + summoner.profileIconId + ".png"} alt="Profile pic"></img>
+        <h2>{summoner.name}</h2>
+      </header>
+
+      <section className={appStyles.overview}>
+        <p>Gamemode</p>
+        <p>Win/Loss</p>
+        <p>KDA</p>
+      </section>
+      <section className={appStyles.recap}>
+        <div>
+          <h3>Highest Kills</h3>
+        </div>
+      </section>
+    </div>
+  )
+}
+
+export default App
+
+
+/* {<header className={appStyles.header}>
         <h1>LoL Tracker</h1>
         <form onSubmit={summ => searchUser(summ)}>
           <input type="text" onChange={(e) => setSummonerSearch(e.target.value)}value={summonerSearch} />
@@ -52,10 +84,4 @@ const App = () => {
           :
           <></>
         }
-      </div>
-      
-    </div>
-  )
-}
-
-export default App
+      </div>} */

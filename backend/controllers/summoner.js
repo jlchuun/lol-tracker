@@ -1,6 +1,5 @@
 require('dotenv').config()
 const summonerRouter = require('express').Router()
-const { default: matchers } = require('@testing-library/jest-dom/matchers')
 const axios = require('axios')
 
 let key = process.env.RIOT_KEY
@@ -29,7 +28,6 @@ summonerRouter.get('/:summonerName', (req, res) => {
 
 summonerRouter.get('/:summonerName/matches', async (req, res) => {
     const puuid = await getSummPuuid(req.params.summonerName)
-
     const matchIDs = await axios.get(
         `https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=10&api_key=${key}`
     )
