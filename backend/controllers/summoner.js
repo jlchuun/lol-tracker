@@ -49,16 +49,16 @@ summonerRouter.get('/:summonerName/matches', async (req, res) => {
             return response.data
         })
         .catch(error => console.log(error))
-        if (matchData.queueId == 420 || matchData.queueId == 440) {
+        if (matchData.info.queueId == 420 || matchData.info.queueId == 440) {
             ranked.push(matchData)
-        } else if (matchData.queueId == 450) {
+        } else if (matchData.info.queueId == 450) {
             aram.push(matchData)
-        } else if(matchData.queueId == 400 || matchData.queueId == 430) {
+        } else if(matchData.info.queueId == 400 || matchData.info.queueId == 430) {
             normal.push(matchData)
         }
     }
     matches.push(aram, ranked, normal)
-    return res.json(matches)
+    return res.json(aram)
 })
 
 module.exports = summonerRouter

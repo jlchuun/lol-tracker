@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import appStyles from './App.module.css'
 import axios from 'axios'
+import GameStat from './GameStat'
 
 const App = () => {
   const [summonerSearch, setSummonerSearch] = useState('')
@@ -16,10 +17,11 @@ const App = () => {
 
     axios
       .get(`/summoner/${summonerSearch}/matches`)
-      .then(response => setMatchHistory(response.data))
+      .then(response => {
+        setMatchHistory(response.data)
+      })
       .catch(error => console.log(error))
-
-    console.log(matchHistory)
+    
     setSummonerSearch('')
   }
 
@@ -44,12 +46,14 @@ const App = () => {
         <h2>{summoner.name}</h2>
         <p>{summoner.summonerLevel}</p>
       </header>
-
+      {JSON.stringify(summoner) !== '{}' ? 
       <section className={appStyles.overview}>
-        <p>Gamemode</p>
-        <p>Win/Loss</p>
-        <p>KDA</p>
+        <GameStat gamemode="ARAM" matches={matchHistory} summonerName={summoner.name} />
+        {/* <GameStat gamemode="Ranked" matches={matchHistory[1]} summoner={summoner.name} />
+        <GameStat gamemode="Normal" matches={matchHistory[2]} summoner={summoner.name} /> */}
       </section>
+         :
+        <p></p>}
       <section className={appStyles.recap}>
         <div>
           <h3>Highest Kills</h3>
