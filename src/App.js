@@ -42,6 +42,7 @@ const App = () => {
       <header>
         <img src={"http://ddragon.leagueoflegends.com/cdn/12.23.1/img/profileicon/" + summoner.profileIconId + ".png"} alt="Profile pic"></img>
         <h2>{summoner.name}</h2>
+        <p>{summoner.summonerLevel}</p>
       </header>
 
       <section className={appStyles.overview}>
