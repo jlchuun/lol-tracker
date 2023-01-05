@@ -27,7 +27,7 @@ summonerRouter.get('/:summonerName', (req, res) => {
 })
 
 // get last 1000 matches
-summonerRouter.get('/:summonerName/matches', async (req, res) => {
+summonerRouter.get('/:summonerName/matches/:gamemode', async (req, res) => {
     const puuid = await getSummPuuid(req.params.summonerName)
     const matchIDs = await axios.get(
         `https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=5&api_key=${key}`
@@ -37,7 +37,6 @@ summonerRouter.get('/:summonerName/matches', async (req, res) => {
     })
     .catch(error => console.log(error))
 
-    const matches = []
     const aram = []
     const ranked = []
     const normal = []
@@ -49,6 +48,7 @@ summonerRouter.get('/:summonerName/matches', async (req, res) => {
             return response.data
         })
         .catch(error => console.log(error))
+
         if (matchData.info.queueId == 420 || matchData.info.queueId == 440) {
             ranked.push(matchData)
         } else if (matchData.info.queueId == 450) {
@@ -57,8 +57,13 @@ summonerRouter.get('/:summonerName/matches', async (req, res) => {
             normal.push(matchData)
         }
     }
-    matches.push(aram, ranked, normal)
-    return res.json(aram)
+    if (req.params.gamemode === 'ranked') {
+        return res.json(ranked)
+    } else if (req.params.gamemode === 'aram') {
+        return res.json(aram)
+    } else if (req.params.gamemode === 'normal') {
+        return res.json(normal)
+    }
 })
 
 module.exports = summonerRouter
