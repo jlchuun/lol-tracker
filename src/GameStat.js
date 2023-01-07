@@ -1,4 +1,5 @@
 import Stats from "./Stats";
+import appStyles from'./App.module.css'
 
 const GameStat = ({matches, summonerName, stat}) => {
     let shownSummoner
@@ -68,15 +69,24 @@ const GameStat = ({matches, summonerName, stat}) => {
         
     }
     return (
-        <div>
+        <div className={appStyles.gameStatCard}>
             <h1>{stat.name}</h1>
-            {shownSummoner ? 
+            
+            {shownSummoner !== null ?
             <>
-            <div>Champion: {shownSummoner.championName}</div>
-            <div>KDA: {shownSummoner.kills} / {shownSummoner.deaths} / {shownSummoner.assists}</div>
-            <div>Statistic: {shownStat}</div>
-            </> :
-            <></>}
+                <div className={appStyles.gameStatFront}>
+                    <div className={appStyles.gameStatChamp}>
+                        <img src={`http://ddragon.leagueoflegends.com/cdn/12.23.1/img/champion/${shownSummoner.championName}.png`}></img>
+                        <p>{shownSummoner.championName}</p>
+                    </div>
+                    <p className={appStyles.kda}>{shownSummoner.kills} / {shownSummoner.deaths} / {shownSummoner.assists}</p>
+                </div>
+                <div className={appStyles.gameStatBack}>
+                    
+                </div>
+            </> 
+            : <></>}
+            
             
         </div>
     )

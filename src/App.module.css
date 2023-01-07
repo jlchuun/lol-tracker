@@ -4,9 +4,23 @@ html {
     box-sizing: border-box;
 }
 
-body {
+*,
+*::before,
+*::after {
     margin: 0;
-    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+}
+
+h1, h2, h3, p {
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
 }
 
 .container {
@@ -47,3 +61,38 @@ section {
     height: 100%;
     font-size: 20px;
 }
+
+/*
+GameStat Component
+*/
+
+.gameStatCard {
+    width: 20em;
+    border: solid black;
+}
+
+.gameStatFront {
+    display: flex;
+    align-items: center;
+}
+
+.gameStatChamp {
+    display: flex;
+    flex-direction: column;
+    width: 4em;
+    text-align: center;
+}
+
+
+.gameStatCard img {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.kda {
+    flex-grow: 2;
+}
+
