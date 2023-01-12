@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500,700&display=swap");
+
+
 html {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'DM', sans-serif;
     font-size: calc(20rem / 16);
     box-sizing: border-box;
 }
@@ -14,12 +17,12 @@ html {
 :root {
     --clr-dark-gray: rgb(100, 107, 122);
     --clr-light-gray: rgb(174, 186, 199);
-    --clr-light: #fff;
+    --clr-light: #f3f6fd;
 }
 
 body {
+    background-color: var(--clr-light);
     min-height: 100vh;
-    background: var(--clr-dark-gray);
 }
 
 h1, h2, h3, p {
@@ -36,7 +39,6 @@ img {
 }
 
 nav {
-    background-color: rgb(51, 139, 211);
     padding: 10px;
     display: flex;
     flex-direction: row;
@@ -44,9 +46,23 @@ nav {
 }
 
 header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     padding: 15px;
     border: black solid 1px;
 }
+
+header img {
+    height: 10em;
+    width: 10em;
+    border-radius: 50%;
+    border: 5px white solid;
+    box-shadow: 0px 0px 37px 9px rgba(0,0,0,0.1);
+    margin-bottom: 1.6em;
+}
+
 
 section {
     border: black solid 1px;
@@ -55,27 +71,46 @@ section {
 
 .searchBar {
     display: flex;
-    align-items: center;
-    padding: 10px;
-    border: none;
-    height: 100%;
+    width: 100%;
 }
 
 .searchInput {
-    border: none;
+    padding: .2em;
+    height: 2.5em;
+    font-size: 16px;
+    border-radius: 5px;
     outline: none;
-    width: 350px;
-    height: 100%;
-    font-size: 1em;
+    box-shadow: 0px 0px 21px 0px rgba(0,0,0,0.1);
 }
 
-.recap {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 1em;
-    justify-content: center;
-    grid-gap: 5em;
-    grid-template-columns: repeat(auto-fit, minmax(22em, 1fr));
+
+.recapContainer {
+    max-width: 100em;
+    margin-inline: auto;
+    padding-inline: 2rem;
+}
+
+.recapGrid {
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+/*
+Winrate Component
+*/
+
+.winLossBar {
+    width: 8em;
+    height: 1.6em;
+    background-color: rgba(255, 0, 0, 0.644);
+    z-index: -1;
+}
+
+.wins {
+    height: 1.6em;
+    background-color: rgba(35, 161, 192, 0.808);
+    z-index: 1;
 }
 
 
@@ -83,59 +118,45 @@ section {
 GameStat Component
 */
 
-
-.gameStatTop, .gameStatBot {
-    width: 22em;
-    height: 13em;
-    transition: 0.5s;
+.cardImage {
+    width: 400px;
 }
-
-.gameStatTop {
-    position: relative;
-    background: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    transform: translateY(6.5em);
-}
-
-.gameStatCard:hover .gameStatTop {
-    background: #ff0057;
-    transform: translateY(0);
-}
-
-.gameStatBot {
-    position: relative;
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-    transform: translateY(-6.5em);
-}
-
-.gameStatCard:hover .gameStatBot {
-    transform: translateY(0);
-}
-
-
-.gameStatChamp {
-    display: flex;
-    flex-direction: column;
-    width: 4em;
+.gameStatCard {
+    background: white;
+    width: 20em;
+    margin: auto;
     text-align: center;
 }
 
 
-.gameStatCard img {
-    width: 2.5em;
-    height: 2.5em;
-    border-radius: 50%;
-    margin-left: auto;
-    margin-right: auto;
+/* CARD HAND LAYOUT
+.gameStatCard {
+    display: flex;
+    height: 500px;
+    width: 400px;
+    background-color: #222;
+    border-radius: 10px;
+    box-shadow: 0px 0px 0px 0px #FC5185;
+    transition: 
+        0.4s ease-out,
+        box-shadow 0.6s linear;
+    position: relative;
+    left: 0px;
 }
 
+
+.gameStatCard:hover {
+    box-shadow: 0px 0px 0px 3px #FC5185;
+}
+
+.gameStatCard:not(:first-child) {
+    margin-left: -50px;
+}
+
+.gameStatCard:hover {
+    transform: translateY(-20px);
+    transition: 0.4s ease-out;
+}
+
+*/
 

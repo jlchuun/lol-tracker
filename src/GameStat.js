@@ -69,17 +69,11 @@ const GameStat = ({matches, summonerName, stat}) => {
         
     }
     return (
-        <div className={appStyles.gameStatCard}>
+        <div className={`${appStyles.gameStatCard}`}>
             {shownSummoner !== null ?
             <>
-                <div className={`${appStyles.gameStatTop} ${appStyles.face}`}>
-                    <div className={appStyles.gameStatChamp}>
-                        <img src={`http://ddragon.leagueoflegends.com/cdn/12.23.1/img/champion/${shownSummoner.championName}.png`}></img>
-                        <h1>{stat.name}</h1>
-                    </div>
-                </div>
-                <div className={`${appStyles.gameStatBot} ${appStyles.face}`}>
-                    Dolor cupidatat in commodo esse. Elit est labore ipsum deserunt excepteur nostrud adipisicing. Laborum dolor eu ex anim dolore est pariatur deserunt elit adipisicing enim adipisicing ea.
+                <div className={`${appStyles.cardImage}`}>
+                    <img src={`http://ddragon.leagueoflegends.com/cdn/13.1.1/img/champion/${shownSummoner.championName.charAt(0).toUpperCase() + shownSummoner.championName.slice(1)}.png`}></img>
                 </div>
             </> 
             : <></>}

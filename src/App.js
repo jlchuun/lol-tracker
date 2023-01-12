@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react'
 import appStyles from './App.module.css'
 import axios from 'axios'
 import GameStat from './GameStat.js'
-import ModeStat from './ModeStat.js'
+import Winrate from './Winrate.js'
 import Stats from './Stats'
 
 const App = () => {
   const [summonerSearch, setSummonerSearch] = useState('')
   const [summoner, setSummoner] = useState({})
   const [aramHistory, setAramHistory] = useState([])
-  // const [rankedHistory, setRankedHistory] = useState([])
-  // const [normalHistory, setNormalHistory] = useState([])
 
 
   const searchUser = (e) => {
@@ -25,34 +23,19 @@ const App = () => {
       .then(response => {
         setAramHistory(response.data)
       })
-      .catch(error => console.log(error))
-
-    // axios
-    // .get(`/summoner/${summonerSearch}/matches/ranked`)
-    // .then(response => {
-    //   setRankedHistory(response.data)
-    // })
-    // .catch(error => console.log(error))
-
-    // axios
-    // .get(`/summoner/${summonerSearch}/matches/normal`)
-    // .then(response => {
-    //   setNormalHistory(response.data)
-    // })
-    // .catch(error => console.log(error))
-    
+      .catch(error => console.log(error)) 
     setSummonerSearch('')
   }
 
   useEffect(() => {
-    document.title = 'LoL Tracker'
+    document.title = 'ARAM Recap'
   }, [])
 
   return (
     <div className={appStyles.container}>
       <nav>
         <div className={appStyles.icon}>
-          <h1>LoL Tracker</h1>
+          <h1>ARAM Recap</h1>
         </div>
         <div className={appStyles.searchBar}>
           <form onSubmit={summ => searchUser(summ)}>
@@ -64,31 +47,27 @@ const App = () => {
         <img src={"http://ddragon.leagueoflegends.com/cdn/12.23.1/img/profileicon/" + summoner.profileIconId + ".png"} alt="Profile pic"></img>
         <h2>{summoner.name}</h2>
         <p>{summoner.summonerLevel}</p>
+        <Winrate matches={aramHistory} summonerName={summoner.name} />
+        
       </header>
-      <section className={appStyles.overview}>
-      {JSON.stringify(summoner) !== '{}' ?
-        <>
-        <ModeStat gamemode="ARAM" matches={aramHistory} summonerName={summoner.name} />
-        {/* <ModeStat gamemode="Ranked" matches={rankedHistory} summoner={summoner.name} />
-        <ModeStat gamemode="Normal" matches={normalHistory} summoner={summoner.name} /> */}
-        </>
-         :
-         <>Loading Match Overview</>}
-      </section>
-      <section className={appStyles.recap}>
-      {aramHistory.length > 0 ?
-        <>
-        <GameStat matches={aramHistory} summonerName={summoner.name} stat={Stats.MostKills} />
-        <GameStat matches={aramHistory} summonerName={summoner.name} stat={Stats.LeastKills} />
-        <GameStat matches={aramHistory} summonerName={summoner.name} stat={Stats.MostDeaths} />
-        <GameStat matches={aramHistory} summonerName={summoner.name} stat={Stats.LeastDeaths} />
-        <GameStat matches={aramHistory} summonerName={summoner.name} stat={Stats.MostAssists} />
-        <GameStat matches={aramHistory} summonerName={summoner.name} stat={Stats.LeastAssists} />
-        </>
-         :
-         <>Loading Recap</>}
-      </section>
-    </div>
+      <div className={appStyles.recapContainer}>
+        <section className={appStyles.recapGrid}>
+        {aramHistory.length > 0 ?
+          <>
+      
+            <GameStat matches={aramHistory} summonerName={summoner.name} stat={Stats.MostKills}/>
+            <GameStat matches={aramHistory} summonerName={summoner.name} stat={Stats.LeastKills}/>
+            <GameStat matches={aramHistory} summonerName={summoner.name} stat={Stats.MostDeaths}/>
+            <GameStat matches={aramHistory} summonerName={summoner.name} stat={Stats.LeastDeaths}/>
+            <GameStat matches={aramHistory} summonerName={summoner.name} stat={Stats.MostAssists}/>
+            <GameStat matches={aramHistory} summonerName={summoner.name} stat={Stats.LeastAssists}/>
+          </>
+          :
+          <>Loading Recap</>}
+        </section>
+      </div>
+      
+      </div>
   )
 }
 
